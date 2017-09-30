@@ -12,12 +12,15 @@ import java.sql.SQLException;
 
 public class App{
  
-    private final String url = "jdbc:postgresql://localhost:5432/dvdrental";
-    private final String user = "postgres";
-    private final String password = "password";
+    private static String url = "jdbc:postgresql://localhost:5432/Chan";
+    private static String user = "Chan";
+    private static String password = "";
  
-
-    public Connection connect() {
+ 
+    public static void main(String[] args) throws SQLException {
+        
+        App app = new App();
+        
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);
@@ -25,14 +28,7 @@ public class App{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
- 
-        return conn;
-    }
- 
-
-    public static void main(String[] args) {
-        App app = new App();
-        app.connect();
+    
     }
 }
 
