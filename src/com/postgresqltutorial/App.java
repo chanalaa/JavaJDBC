@@ -7,6 +7,7 @@ package com.postgresqltutorial;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ import java.sql.Statement;
 
 public class App{
  
-    private static String url = "jdbc:postgresql://Chandb:5432/Chan";
+    private static String url = "jdbc:postgresql://localhost:5432/Chan";
     private static String user = "Chan";
     private static String password = "";
  
@@ -27,8 +28,9 @@ public class App{
         
         
         Statement statement = conn.createStatement();
-        
-        ResultSet result = statement.executeQuery("SELECT * FROM people");
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM people");
+        ResultSet result = preparedStatement.executeQuery();
+        //ResultSet result = statement.executeQuery("SELECT * FROM people");
         
         while (result.next()) {
             String names = result.getString("name"); 
