@@ -16,39 +16,45 @@ import java.util.Scanner;
 
 public class App{
  
-    private static String url = "jdbc:postgresql://localhost:5432/Mahad";
-    private static String user = "Mahad";
+    private static String url = "jdbc:postgresql://localhost:5432/Chan";
+    private static String user = "Chan";
     private static String password = "";
  
     public static void main(String[] args) throws SQLException, FileNotFoundException {
-        String filepath = "/Users/Mahad/IdeaProjects/JavaJDBC/src/com/postgresqltutorial/grades.txt";
+        String filepath = "/Users/Chan/NetBeansProjects/PostgreSQLJDBC/src/com/postgresqltutorial/grades.txt";
         Scanner scan = new Scanner(new File(filepath));
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the PostgreSQL server successfully.");
+            connection();
+            
             
             String sql = "INSERT into histogram (id, number) VALUES (?,?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            PreparedStatement preparedStatement;
+            //preparedStatement = connection().conn.prepareStatement(sql);
             int index = 1;
-            while(scan.hasNext()) {
+            /*while(scan.hasNext()) {
                 int num = scan.nextInt();
                 preparedStatement.setInt(1,index);
                 preparedStatement.setInt(2,num);
                 preparedStatement.executeUpdate();
 
                 index++;
-            }
+            }*/
                         
-            } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+            
         
     }
     
-    public static void connection(){}
+    public static void connection() throws SQLException {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connected to the PostgreSQL server successfully.");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public static void createTableFromDatabase(){} // leave this one till last
-    public static void readFromDatabase(){}
+    public static void readFromDatabase(){    }
     public static void useStatementMethodtoInsertIntoDatabase(){}
     public static void useStatementMethodtoDeletefromDatabase(){}
     public static void useStatementMethodtoUpdatefromDatabase(){}
