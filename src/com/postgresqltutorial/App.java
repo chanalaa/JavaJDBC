@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -26,9 +27,9 @@ public class App {
         Scanner scan = new Scanner(new File(filepath));
         try {
             connection();
-            //useStatementMethodtoInsertIntoDatabase();
-            //useStatementMethodtoUpdatefromDatabase();
-            usePreparedStatementMethodtoInsertIntoDatabase();
+            //usePreparedStatementMethodtoInsertIntoDatabase();
+            usePreparedStatementMethodtoUpdateIntoDatabase();
+            readFromDatabase();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -36,15 +37,21 @@ public class App {
     }
 
     public static Connection connection() throws SQLException {
-        Connection conn = null;
-        conn = DriverManager.getConnection(url, user, password);
+        Connection conn = DriverManager.getConnection(url, user, password);
         return conn;
     }
 
     public static void createTableFromDatabase() {
     } // leave this one till last
 
-    public static void readFromDatabase() {
+    public static void readFromDatabase() throws SQLException {
+        PreparedStatement preparedStatement = connection().prepareStatement("select * from histogram");
+        ResultSet result = preparedStatement.executeQuery();
+          
+          while (result.next()) {
+              String numbers = result.getString("number"); 
+              System.out.println(numbers);
+          }
     }
 
     public static void useStatementMethodtoInsertIntoDatabase() throws SQLException {
@@ -70,9 +77,15 @@ public class App {
     }
 
     public static void usePreparedStatementMethodtoUpdateIntoDatabase() throws SQLException {
+        PreparedStatement preparedStatement = connection().prepareStatement("UPDATE histogram set number=? WHERE id=?");
+        preparedStatement.setInt(1, 102);
+        preparedStatement.setInt(2, 111);
+        preparedStatement.executeUpdate();
     }
 
     public static void usePreparedStatementMethodtoDeleteIntoDatabase() throws SQLException  {
+        PreparedStatement preparedStatement = connection().prepareStatement("DELETE from histogram where id = 102");
+        preparedStatement.executeUpdate();
     }
 
 }
