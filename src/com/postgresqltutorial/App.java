@@ -50,7 +50,12 @@ public class App{
     public static void createTableFromDatabase(){} // leave this one till last
     public static void readFromDatabase(){}
     public static void useStatementMethodtoInsertIntoDatabase(){}
+    public static void useStatementMethodtoDeletefromDatabase(){}
+    public static void useStatementMethodtoUpdatefromDatabase(){}
     public static void usePreparedStatementMethodtoInsertIntoDatabase(){}
+    public static void usePreparedStatementMethodtoUpdateIntoDatabase(){}
+    public static void usePreparedStatementMethodtoDeleteIntoDatabase(){}
+    
     
 }
 
