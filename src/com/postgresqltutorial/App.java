@@ -26,7 +26,9 @@ public class App {
         Scanner scan = new Scanner(new File(filepath));
         try {
             connection();
-            useStatementMethodtoDeletefromDatabase();
+            //useStatementMethodtoInsertIntoDatabase();
+            //useStatementMethodtoUpdatefromDatabase();
+            usePreparedStatementMethodtoInsertIntoDatabase();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -53,19 +55,24 @@ public class App {
     public static void useStatementMethodtoDeletefromDatabase() throws SQLException {
         Statement statement = connection().createStatement();
         statement.executeUpdate("DELETE from histogram where id = 101");
-
     }
 
-    public static void useStatementMethodtoUpdatefromDatabase() {
+    public static void useStatementMethodtoUpdatefromDatabase() throws SQLException {
+        Statement statement = connection().createStatement();
+        statement.executeUpdate("UPDATE histogram values (101, 99)");
     }
 
-    public static void usePreparedStatementMethodtoInsertIntoDatabase() {
+    public static void usePreparedStatementMethodtoInsertIntoDatabase() throws SQLException {
+        PreparedStatement preparedStatement = connection().prepareStatement("INSERT into histogram (id, number) VALUES (?,?)");
+        preparedStatement.setInt(1, 102);
+        preparedStatement.setInt(2, 99);
+        preparedStatement.executeUpdate();
     }
 
-    public static void usePreparedStatementMethodtoUpdateIntoDatabase() {
+    public static void usePreparedStatementMethodtoUpdateIntoDatabase() throws SQLException {
     }
 
-    public static void usePreparedStatementMethodtoDeleteIntoDatabase() {
+    public static void usePreparedStatementMethodtoDeleteIntoDatabase() throws SQLException  {
     }
 
 }
