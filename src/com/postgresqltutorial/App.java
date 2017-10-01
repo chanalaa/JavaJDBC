@@ -10,9 +10,7 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Scanner;
 
 
@@ -35,7 +33,7 @@ public class App{
             int index = 1;
             while(scan.hasNext()) {
                 int num = scan.nextInt();
-                preparedStatement.setInt(1, index);
+                preparedStatement.setInt(1,index);
                 preparedStatement.setInt(2,num);
                 preparedStatement.executeUpdate();
 
@@ -47,5 +45,12 @@ public class App{
         }
         
     }
+    
+    public static void connection(){}
+    public static void createTableFromDatabase(){} // leave this one till last
+    public static void readFromDatabase(){}
+    public static void useStatementMethodtoInsertIntoDatabase(){}
+    public static void usePreparedStatementMethodtoInsertIntoDatabase(){}
+    
 }
 
